@@ -17,12 +17,13 @@ const AdvisingDownloader = async (cookie) => {
 			fs.writeFileSync(AdvisingPage, res.data);
 			return {
 				Path: "./html_Pages/Advising.html",
-				Success: true,
+				cookie: cookie,
+				success: true,
 			};
 		} else {
 			return {
 				request_Path: res.request.path,
-				Success: false,
+				success: false,
 			};
 		}
 	});

@@ -4,7 +4,7 @@ const FilterImage = async (
 	ogCaptcha = "./Captcha/ogTest.png",
 	bwCaptcha = "./images/bwTest.png"
 ) => {
-	console.time(import.meta.url);
+	// console.time(import.meta.url);
 	let img = await jimp.read(ogCaptcha);
 	// img = img.contrast(1);
 	// img = img.grayscale();
@@ -23,7 +23,7 @@ const FilterImage = async (
 	img.quality(90);
 
 	return new Promise((res) => {
-		console.timeEnd(import.meta.url);
+		// console.timeEnd(import.meta.url);
 		res(img.writeAsync(bwCaptcha));
 	});
 };

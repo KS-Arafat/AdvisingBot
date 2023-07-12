@@ -11,11 +11,25 @@ const Controller = async () => {
 	const cookie = await DownloadCaptcha();
 	await FilterImage(ogCaptcha, bwCaptcha);
 	const captcha = await Scanner_tess(bwCaptcha);
-	if (captcha.length == 4) {
-		const response = await Auth_Cookie(captcha, cookie);
-		if (response.success) console.log(await AdvisingPage(cookie));
-	} else console.error("Wrong Captcha");
-	console.log(cookie + " :: " + captcha);
+	if (captcha.length != 4)
+		return {
+			success: false,
+			msg: "bad Captcha",
+		};
+	const response = await Auth_Cookie(captcha, cookie);
+	if (response.success) return await AdvisingPage(cookie);
+	else return response;
 };
 
-await Controller();
+const MainBot = async (MAX_TRIES = 5) => {
+	var Try = 0;
+	var temp = { success: false };
+	while (!temp.success && Try < MAX_TRIES) {
+		Try++;
+		console.log("\nAttempt : " + Try + "/" + MAX_TRIES);
+		temp = await Controller();
+		console.log(temp);
+	}
+	setTimeout((_) => _, 1000);
+};
+await MainBot();

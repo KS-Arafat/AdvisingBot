@@ -14,14 +14,14 @@ const ID_hash = process.env.ID_hash;
 const Pwd = process.env.Pwd;
 
 const Auth_Cookie = async (captchaCode, cookie) => {
-	console.time(import.meta.url);
+	// console.time(import.meta.url);
 	const form = new FormData();
 	form.append("password", Pwd);
 	form.append("captcha", captchaCode);
 	form.append("username", ID_hash);
 	form.append("commit", "Login");
 
-	console.log(`${captchaCode}  ${cookie}`);
+	// console.log(`${captchaCode}  ${cookie}`);
 	const config = {
 		method: "post",
 		url: authURL,
@@ -34,7 +34,7 @@ const Auth_Cookie = async (captchaCode, cookie) => {
 	// console.log(config);
 	return axios(config)
 		.then((res) => {
-			console.timeEnd(import.meta.url);
+			// console.timeEnd(import.meta.url);
 			fs.writeFileSync(HomePage, res.data);
 			if (res.request.path == "/index.php/students/landing") {
 				return {
@@ -44,13 +44,16 @@ const Auth_Cookie = async (captchaCode, cookie) => {
 				};
 			} else {
 				return {
-					msg: "Wrong Captcha",
+					msg: "Wrong Captcha / Pwd / ID_hash",
 					success: false,
 				};
 			}
 		})
 		.catch((err) => {
-			console.error(err);
+			return {
+				msg: "API error occurd",
+				error: err,
+			};
 		});
 };
 

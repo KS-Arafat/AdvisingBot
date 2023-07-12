@@ -6,7 +6,7 @@ import GenerateCookie from "../Cookie-Image-OCR/cookieGen.js";
 
 const currentCookie = `PHPSESSID=${GenerateCookie}`;
 const DownloadCaptcha = async () => {
-	console.time(import.meta.url);
+	// console.time(import.meta.url);
 
 	const config = {
 		url: captchaURL,
@@ -20,7 +20,7 @@ const DownloadCaptcha = async () => {
 	return await axios(config)
 		.then(async (response) => {
 			fs.writeFileSync(ogCaptcha, response.data);
-			console.timeEnd(import.meta.url);
+			// console.timeEnd(import.meta.url);
 			return currentCookie;
 		})
 		.catch((err) => console.error(err));

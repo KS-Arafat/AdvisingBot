@@ -2,7 +2,7 @@ import { bwCaptcha } from "../Directories-URLS/Directories.js";
 import { createWorker, OEM } from "tesseract.js";
 
 const Scanner_tess = async (imgURL = bwCaptcha) => {
-	console.time(import.meta.url);
+	// console.time(import.meta.url);
 	const worker = await createWorker({});
 	await worker.loadLanguage("eng");
 	await worker.initialize("eng");
@@ -17,7 +17,7 @@ const Scanner_tess = async (imgURL = bwCaptcha) => {
 	});
 	const data = text.replace(/[^0-9]/gi, "");
 	await worker.terminate();
-	console.timeEnd(import.meta.url);
+	// console.timeEnd(import.meta.url);
 	return Promise.resolve(data);
 };
 

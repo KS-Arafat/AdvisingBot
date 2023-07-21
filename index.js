@@ -16,9 +16,9 @@ const Controller = async () => {
 			success: false,
 			msg: "bad Captcha",
 		};
-	const response = await Auth_Cookie(captcha, cookie);
-	if (response.success) return await AdvisingPage(cookie);
-	else return response;
+	return await Auth_Cookie(captcha, cookie);
+	// if (response.success) return await AdvisingPage(cookie);
+	// else return response;
 };
 
 const MainBot = async (MAX_TRIES = 5) => {
@@ -29,7 +29,10 @@ const MainBot = async (MAX_TRIES = 5) => {
 		console.log("\nAttempt : " + Try + "/" + MAX_TRIES);
 		temp = await Controller();
 		console.log(temp);
+		setTimeout((_) => _, 1000);
 	}
-	setTimeout((_) => _, 1000);
+	if (Try == MAX_TRIES) return { success: false, msg: "Authentication Failed" };
+	const advres = await AdvisingPage(temp.cookie);
+	console.log("Advising Page:", advres);
 };
 await MainBot();

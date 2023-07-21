@@ -4,6 +4,8 @@ import FilterImage from "./Cookie-Image-OCR/FilterImage.js";
 import Scanner_tess from "./Cookie-Image-OCR/OCR_Tesseract.js";
 import Auth_Cookie from "./httpReq/Authentication.js";
 import AdvisingPage from "./httpReq/AdvisingPage.js";
+import LaunchScraper from "./Scraping/scraper.js";
+import saveAdvsing from "./httpReq/saveAdvising.js";
 
 import { ogCaptcha, bwCaptcha } from "./Directories-URLS/Directories.js";
 
@@ -34,5 +36,8 @@ const MainBot = async (MAX_TRIES = 5) => {
 	if (Try == MAX_TRIES) return { success: false, msg: "Authentication Failed" };
 	const advres = await AdvisingPage(temp.cookie);
 	console.log("Advising Page:", advres);
+	const formData = await LaunchScraper(advres.cookie);
+	const savedAd = await saveAdvsing(formData, temp.cookie);
+	console.log(savedAd);
 };
 await MainBot();

@@ -73,6 +73,7 @@ const LaunchScraper = async (cookie = "") => {
 	form.append("studentID", process.env.ID);
 	form.append("courses", myCourese);
 	form.append("readvising", readvNo);
+	console.log("Readvsing Count: " + readvNo);
 	return form;
 };
 

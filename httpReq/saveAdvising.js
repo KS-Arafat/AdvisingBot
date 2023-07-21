@@ -17,7 +17,6 @@ const saveAdvsing = async (form = new FormData(), cookie) => {
 		if (res.status == 200) {
 			return {
 				msg: res.data,
-				course: form,
 				success: true,
 			};
 		} else return { msg: res.data, success: false };

@@ -18,6 +18,6 @@
   - **New Design:** The next project iteration aims to introduce a new design, prioritizing reliability and a more humane approach to the advising process.
 
 ## Last Note
-    `New Authentication update has crippled the current version`</br>
-    `So just leave it alone`
+`New Authentication update has crippled the current version`</br>
+`So just leave it alone`
 
